@@ -34,13 +34,13 @@ interface Veiculo{
             </td>
             `;
 
-            if(salva)
 
-            $("#patio")?.appendChild(row)
+           
 
             row.querySelector(".delete")?.addEventListener("click", function(){
                 remover(this.dataset.placa)
             })
+            $("#patio")?.appendChild(row)
             if (salva) salvar([...ler(), veiculo]) // Recarrega as informações dos carros anteriores. 
         }
 
@@ -50,7 +50,7 @@ interface Veiculo{
 
             const tempo = calcTempo(new Date().getTime() - new Date(entrada).getTime());
 
-            if(confirm(`O veiculo ${nome} permaneceu por ${tempo}. Deseja encerrar?`)) return;
+            if(!confirm(`O veiculo ${nome} permaneceu por ${tempo}. Deseja encerrar?`)) return;
 
             salvar(ler().filter(veiculo => veiculo.placa !== placa));
             render();
@@ -71,14 +71,14 @@ interface Veiculo{
             }
         }
 
-        return {ler, adicionar, remover, salvar, render}
+        return ({ler, adicionar, remover, salvar, render})
     }
 
 
-    patio().render()
+    patio().render();
     $("#cadastrar")?.addEventListener('click', () => {
-        const nome = $('nome')?.value;
-        const placa = $('placa')?.value;
+        const nome = $('#nome')?.value;
+        const placa = $('#placa')?.value;
 
         if(!nome || !placa){
             alert("Atenção: Os campos nome e placa são obrigatórios!");
